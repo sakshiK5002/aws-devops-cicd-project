@@ -69,14 +69,14 @@ pipeline {
     }
 }
 
-        stage('Docker Build') {
-            steps {
-                sh '''
-                    mv target/*.war target/ROOT.war
-                    docker build -t $DOCKER_IMAGE .
-                '''
-            }
-        }
+       stage('Docker Build') {
+    steps {
+        sh '''
+            mv target/aws-devops-project-1.0.war target/ROOT.war
+            docker build -t $DOCKER_IMAGE .
+        '''
+    }
+}
 
         stage('Docker Push') {
             steps {
