@@ -23,6 +23,9 @@ pipeline {
     DOCKER_IMAGE = 'sakshi0716/aws-devops-project-repo'
     SONAR_SERVER = 'SonarQube'
     SONAR_HOST = 'http://3.111.51.146:9000'
+
+    EC2_KEY_NAME = 'jenkinskey'
+    ADMIN_CIDR = '3.111.51.146/32'
 }
 
     stages {
