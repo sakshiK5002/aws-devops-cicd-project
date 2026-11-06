@@ -19,10 +19,11 @@ pipeline {
         )
     }
 
-    environment {
-        DOCKER_IMAGE = 'sakshi0716/aws-devops-project-repo'
-        SONAR_SERVER = 'SonarQube'
-    }
+   environment {
+    DOCKER_IMAGE = 'sakshi0716/aws-devops-project-repo'
+    SONAR_SERVER = 'SonarQube'
+    SONAR_HOST = 'http://3.111.51.146:9000'
+}
 
     stages {
 
