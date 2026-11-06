@@ -61,7 +61,10 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t $DOCKER_IMAGE .'
+                sh '''
+                    mv target/*.war target/ROOT.war
+                    docker build -t $DOCKER_IMAGE .
+                '''
             }
         }
 
