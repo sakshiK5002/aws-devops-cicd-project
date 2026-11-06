@@ -1,0 +1,60 @@
+---
+- name: Configure and deploy application
+  hosts: app
+  become: yes
+
+  tasks:
+
+    - name: Wait for EC2 SSH connection
+      wait_for_connection:
+        timeout: 300
+
+    - name: Update package list
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Login to Docker Hub
+      command:
+        argv:
+          - docker
+          - login
+          - --username
+          - "{{ dockerhub_username }}"
+          - --password-stdin
+        stdin: "{{ dockerhub_token }}"
+      no_log: true
+
+    - name: Pull Docker image
+      command:
+        argv:
+          - docker
+          - pull
+          - "{{ docker_image }}"
+
+    - name: Remove old container
+      shell: docker rm -f devops-app || true
+
+    - name: Run application container
+      command:
+        argv:
+          - docker
+          - run
+          - -d
+          - --name
+          - devops-app
+          - --restart
+          - unless-stopped
+          - -p
+          - 8080:8080
+          - "{{ docker_image }}"

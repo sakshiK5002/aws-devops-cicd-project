@@ -1,0 +1,10 @@
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/*.tfvars
+
+ansible/inventory.ini
+ansible/host_ip.txt
+
+*.pem
+target/
