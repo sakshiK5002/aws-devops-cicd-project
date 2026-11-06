@@ -58,6 +58,16 @@ pipeline {
         }
     }
 }
+        stage('Check WAR File') {
+    steps {
+        sh '''
+            echo "Checking target directory..."
+            ls -lah target/ || true
+            echo "Searching WAR files..."
+            find . -name "*.war"
+        '''
+    }
+}
 
         stage('Docker Build') {
             steps {
