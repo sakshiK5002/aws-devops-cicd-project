@@ -40,7 +40,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_security_group" "app_sg" {
-  name = "devops-app-sg"
+  name = "devops-app-sg-jenkins"
   description = "Allow SSH and application traffic"
   vpc_id = data.aws_vpc.default.id
 
